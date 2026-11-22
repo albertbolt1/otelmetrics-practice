@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: metricsapp
+spec:
+  selector:
+    app: metricsapp
+  ports:
+    - port: 8090
+      targetPort: 8090

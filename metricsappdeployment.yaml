@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metricsapp
+  labels:
+    app: metricsapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metricsapp
+  template:
+    metadata:
+      labels:
+        app: metricsapp
+    spec:
+      containers:
+        - name: metricsapp
+          image: metricsapp:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8090
+          env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://lgtm.default.svc.cluster.local:4317"
+            - name: OTEL_SERVICE_NAME
+              value: "metrics-app"
+
+            
